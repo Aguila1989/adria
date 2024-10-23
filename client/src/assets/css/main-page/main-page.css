@@ -1,0 +1,85 @@
+body {
+    background-color: #ffffff;
+    color: #363636;
+    font-size: 1rem;
+    font-family: "new times romans", Helvetica, serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+body main {
+    height: 85vh;
+
+}
+
+body main p {
+    text-align: center;
+    font-size: 2rem;
+}
+
+
+body main .buttonsPro {
+    height: 60vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+}
+
+body main .buttonsPlus {
+    height: 60vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+}
+
+body main .buttonsBasic {
+    height: 60vh;
+    width: 50vw;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+}
+
+.buttonsPro button, .buttonsPlus button, .buttonsBasic button {
+    margin: 2rem;
+    width: 70%;
+    height: 50%;
+    background-color: #7fffd4;
+    border-radius: 2rem;
+    font-size: 2rem;
+    border: none;
+    color: #0A3200;
+    box-shadow: 0.1rem 0.1rem 0.3rem #0A3200;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+}
+
+.buttonsPro button:hover, .buttonsPlus button:hover, .buttonsBasic button:hover {
+    box-shadow: inset 0.1rem 0.1rem 0.3rem #0A3200;
+    cursor: pointer;
+}
+
+/*# sourceMappingURL=main-page.css.map */

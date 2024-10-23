@@ -1,0 +1,49 @@
+body {
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 1rem;
+  font-family: "new times romans", Helvetica, serif;
+  min-height: 100vh;
+}
+body header {
+  background-color: #7fffd4;
+  height: 15vh;
+}
+body header img {
+  max-height: 100%;
+}
+body main {
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+body main p {
+  text-align: center;
+  font-size: 2rem;
+}
+body main .buttons {
+  height: 60vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body main .buttons button {
+  display: block;
+  margin: 2rem;
+  width: 15%;
+  height: 20%;
+  border-radius: 2rem;
+  font-size: 3rem;
+  background-color: #7fffd4;
+  border: none;
+  color: #0A3200;
+  box-shadow: 0.1rem 0.1rem 0.3rem #0A3200;
+}
+body main .buttons button:hover {
+  box-shadow: none;
+}
+
+/*# sourceMappingURL=screen.css.map */

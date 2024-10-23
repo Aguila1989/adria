@@ -1,0 +1,50 @@
+main{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 65vh;
+}
+
+form{
+    height: 30%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form label{
+    font-size: 5rem;
+    margin-bottom: 2rem;
+}
+form input{
+    width: 50%;
+    text-align: center;
+}
+
+button{
+
+    margin: 2rem;
+    width: 30%;
+    height: 10%;
+    background-color: #7fffd4;
+    border-radius: 2rem;
+    font-size: 2rem;
+    border: none;
+    color: #0A3200;
+    box-shadow: 0.1rem 0.1rem 0.3rem #0A3200;
+}
+
+button:hover{
+    box-shadow: inset 0.1rem 0.1rem 0.3rem #0A3200;
+    cursor: pointer;
+}
+
+.errorHandler{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: red;
+}

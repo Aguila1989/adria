@@ -1,0 +1,14 @@
+@use "../sass-variables/colors.scss";
+@use "../sass-variables/flex";
+@use "../sass-variables/general-look";
+
+body {
+  background-color: #ffffff;
+  @include general-look.bodyconf;
+  min-height: 100vh;
+
+
+  header {
+    @include general-look.headerStyling
+  }
+}

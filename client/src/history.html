@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Personal History</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <script src="assets/js/borderButtons.js" defer></script>
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/diagnose-page/history.css">
+    <script src="assets/js/Diagnoses/history.js" defer></script>
+    <script src="assets/js/helpers/helpers.js"></script>
+
+</head>
+<body>
+<header>
+    <img id="logo" src="./images/logo.png" alt="logo" draggable="false">
+    <button id="settings">Settings</button>
+</header>
+<main>
+    <h1>Personal History</h1>
+    <div id="history">
+        <article class="rightLine">
+            <h2>Medical History</h2>
+            <div id="medical"><p>None found</p></div>
+        </article>
+        <article>
+            <h2>Current Medication</h2>
+            <div id="medication"><p>None found</p></div>
+        </article>
+    </div>
+    <nav>
+        <button id="back">&lt; back</button>
+    </nav>
+
+
+</main>
+<footer>
+    <button id="guidance">Emergency Guidance</button>
+    <label for="emergencySlider" class="emergencyText" id="emergencyLabel">! ALERT EMERGENCIES !</label>
+    <input type="range" min="0" max="10000000000000" value="0" class="slider" id="emergencySlider">
+</footer>
+</body>
+</html>

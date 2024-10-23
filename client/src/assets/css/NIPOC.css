@@ -1,0 +1,15 @@
+main{
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#notPOC{
+    margin-top: -7rem;
+    width: 100%;
+    height: 80%;
+    z-index: -1;
+
+}

@@ -1,0 +1,55 @@
+@use "../sass-variables/general-look";
+
+header {
+  @include general-look.headerStyling;
+  display: flex;
+  position: relative;
+  margin-bottom: 1.5rem;
+  h1{
+    font-size: 3rem;
+    margin: 0 auto;
+    position: absolute;
+    transform: translatex(-50%);
+    left: 50%;
+    text-align: center;
+    align-self: center;
+  }
+  img{
+    display: inline-block;
+  }
+}
+main{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-bottom: 10rem;
+  .container{
+    position: relative;
+    width: 45vw;
+    margin-bottom: 5rem;
+    canvas{
+      width: 100%;
+    }
+  }
+}
+footer {
+    height: 1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  nav {
+    display: flex;
+    justify-content: center;
+    button {
+      @include general-look.buttonStyle;
+      position: fixed;
+      bottom: 5rem;
+      width: 15rem;
+      height: 5rem;
+    }
+
+    button:hover {
+      @include general-look.buttonHoover;
+    }
+  }
+}

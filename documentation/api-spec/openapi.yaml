@@ -1,0 +1,721 @@
+openapi: 3.0.3
+info:
+  title: 'AdraMed API'
+  description: 'Welcome to the OpenAPI spec of AdraMed. Here you will find the enpoints we use to provide our service. AdraMed its main focus is collecting health and location data and use this to provide people with personalised healthcare. By tracking location we also aim to make a correlation between the appearance of a certain desease, the location of diagnose and a possible ongoing pandemic.'
+  version: 0.0.1
+servers:
+  - url: https://project-2.ti.howest.be/2023-2024/group-05/
+    description: 'Public API'
+  - url: http://localhost:8080/
+    description: 'Local API'
+paths:
+  /api/users:
+    post:
+      description: Create a new user
+      operationId: createUser
+      tags:
+        - User creation / manipulation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum: ["createUser"]
+                data:
+                  $ref: '#/components/schemas/postUser'
+              required:
+                - type
+                - data
+            examples:
+              creating a new user (Alice):
+                value:
+                  type: createUser
+                  data:
+                    adriaId: 1
+                    subscriptionType: 1
+                    firstname: "Alice"
+                    lastname: "Alison"
+                    birthdate: "2064-07-18"
+                    colonyId: 1
+                    bloodType: "A+"
+                    gender: "F"
+                description: By sending this we create a user in our system, in reality this data will come from the adrians chip that people have implanted
+              creating a new user (Bob):
+                value:
+                  type: createUser
+                  data:
+                    adriaId: 1
+                    subscriptionType: 2
+                    firstname: "Bob"
+                    lastname: "Bobino"
+                    birthdate: "2050-06-29"
+                    colonyId: 2
+                    bloodType: "O+"
+                    gender: "M"
+                description: By sending this we create a user in our system, in reality this data will come from the adrians chip that people have implanted
+              creating a new user (Carol):
+                value:
+                  type: createUser
+                  data:
+                    adriaId: 2
+                    subscriptionType: 3
+                    firstname: "Carol"
+                    lastname: "Carolson"
+                    birthdate: "2053-11-04"
+                    colonyId: 1
+                    bloodType: "B-"
+                    gender: "F"
+                description: By sending this we create a user in our system, in reality this data will come from the adrians chip that people have implanted
+      responses:
+        '201':
+          description: Created
+  /api/users/{adriaId}:
+    post:
+      description: Add a diagnosis to a user <br><br> diagnosedBy <ul><li>Positive = adriaId of a doctor / medical specialist</li><li>Negative<ul><li>-1 = Diagnose by AI</li></ul></li></ul>
+      operationId: addDiagnosis
+      tags:
+        - User info & medical history
+      parameters:
+        - in: path
+          name: adriaId
+          required: true
+          schema:
+            type: integer
+          description: The adriaId (an integer)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum: ["addDiagnosis"]
+                data:
+                  $ref: '#/components/schemas/postDiagnosis'
+              required:
+                - type
+                - data
+      responses:
+        '201':
+          description: Created
+    get:
+      description: Get info about a specific user based on their adriaId <br><br> diagnosedBy <ul><li>Positive = adriaId of a doctor / medical specialist</li><li>Negative<ul><li>-1 = Diagnose by AI</li></ul></li></ul>
+      operationId: getUserInfo
+      tags:
+        - User info & medical history
+      parameters:
+        - in: path
+          name: adriaId
+          required: true
+          schema:
+            type: integer
+          description: The adriaId (an integer)
+        - in: query
+          name: includeMedicalHistory
+          description: Set this param to true if you want the medical history to be included (default = false)
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userWithMedicalInfo'
+              examples:
+                Alice (no medicalHistory):
+                  value:
+                    adriaId: 1
+                    subscription: "ResQ"
+                    firstname: "Alice"
+                    lastname: "Alison"
+                    birthdate: "2064-07-18"
+                    colony: "Adria"
+                    bloodType: "A+"
+                    gender: "F"
+                  description: Response when asking for Alice with /?includeMedicalHistory not set or set to false
+                Alice (with medicalHistory):
+                  value:
+                    adriaId: 1
+                    subscription: "ResQ"
+                    firstname: "Alice"
+                    lastname: "Alison"
+                    birthdate: "2064-07-18"
+                    colony: "Adria"
+                    bloodType: "A+"
+                    gender: "F"
+                    medicalHistory:
+                      - entryId: 1
+                        date: "2084-07-15"
+                        time: "15:37:45"
+                        diagnosedBy: ["Natalie (0)", "Emilia (1)", "Robert (2)"]
+                        diagnosis:
+                          symptoms: [ "cough", "stuffy nose", "running nose", "headache" ]
+                          condition: "flue"
+                  description: Response when asking for Alice with /?includeMedicalHistory=true
+    put:
+      description: We assume the users payment method will be linked to their chip, to simulate this behaviour we have this enpoint that lets us change a users subscription plan (between ResQ, ResQ + en ResQ Pro)
+      operationId: updateSubscription
+      tags:
+        - User creation / manipulation
+      parameters:
+        - in: path
+          name: adriaId
+          required: true
+          schema:
+            type: integer
+          description: The adriaId (integer)
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum: ["changeSubscription"]
+                data:
+                  type: object
+                  properties:
+                    newSubscriptionType:
+                      type: integer
+                      example: 2
+                  required:
+                    - newSubscriptionType
+              required:
+                - type
+                - data
+            examples:
+              set subscription to ResQ:
+                value:
+                  type: "changeSubscription"
+                  data:
+                    newSubscriptionType: 1
+              set subscription to ResQ +:
+                value:
+                  type: "changeSubscription"
+                  data:
+                    newSubscriptionType: 2
+              set subscription to ResQ Pro:
+                value:
+                  type: "changeSubscription"
+                  data:
+                    newSubscriptionType: 3
+      responses:
+        '204':
+          description: No Content
+  /api/users/{adriaId}/{entry}:
+    get:
+      description: Get a specific medical entry of about a specific user based on their adriaId.
+      operationId: getUserMedicalEntry
+      tags:
+        - User info & medical history
+      parameters:
+        - in: path
+          name: adriaId
+          required: true
+          schema:
+            type: integer
+          description: The adriaId (an integer)
+        - in: path
+          name: entry
+          required: true
+          description: returns one specific entry from the selected user's medical history
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getDiagnosis'
+              examples:
+                Alice, retrieving a specific entry:
+                  value:
+                    entryId: 1
+                    date: "2084-07-15"
+                    time: "15:37:45"
+                    diagnosedBy: ["Natalie (0)", "Emilia (1)", "Robert (2)"]
+                    diagnosis:
+                      symptoms: [ "cough", "stuffy nose", "running nose", "headache" ]
+                      condition: "flue"
+  /api/subscriptions:
+    get:
+      description: get all existing subscription types
+      operationId: getSubscriptions
+      tags:
+        - Info endpoints
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  plans:
+                    type: object
+              example:
+                plans:
+                  1: ResQ
+                  2: ResQ +
+                  3: ResQ Pro
+  /api/colonies:
+    get:
+      description: get all existing colonies
+      operationId: getColonies
+      tags:
+        - Info endpoints
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  plans:
+                    type: object
+              example:
+                colonies:
+                  1: Adria
+                  2: Mars
+  #/api/metrics:
+  #  #TODO: design general metrics endpoint => POC?
+  #  get:
+  #    tags:
+  #      - General metrics
+  /api/metrics/{adriaId}:
+    post:
+      description: Trough this endpoint you can add a list (array) of user metrics (no time in request => metric is assumed to be an average of a given day)
+      operationId: addMetrics
+      tags:
+        - User metrics / data collection
+      parameters:
+        - in: path
+          name: adriaId
+          required: true
+          schema:
+            type: integer
+          description: The adriaId (an integer)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum: ["addMetrics"]
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      metricCategory:
+                        type: integer
+                        example: 3
+                      date:
+                        type: string
+                        example: 2084-02-07
+                      time:
+                        type: string
+                        example: 17:00:00
+                      metricValue:
+                        type: number
+                        example: 3.5555
+                    required:
+                      - metricCategory
+                      - date
+                      - metricValue
+              required:
+                - type
+                - data
+      responses:
+        '201':
+          description: Created
+    get:
+      description: trough this endpoint you get the average metrics for a certain user grouped by day (if an average is missing it'll be null)
+      operationId: getMetrics
+      tags:
+        - User metrics / data collection
+      parameters:
+        - in: path
+          name: adriaId
+          required: true
+          schema:
+            type: integer
+          description: The adriaId (an integer)
+        - in: query
+          name: startDate
+          description: give all metrics starting from a certain date (inclusive)
+          required: false
+          schema:
+            type: string
+            example: 2084-01-01
+        - in: query
+          name: endDate
+          description: give all metrics up until a given date (inclusive)
+          required: false
+          schema:
+            type: string
+            example: 2084-01-15
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  2084-01-01:
+                    type: object
+                    properties:
+                      "Heart Rate":
+                        type: number
+                        example: 66
+                      "Blood Pressure":
+                        type: number
+                        example: 100
+                      "Temperature":
+                        type: number
+                        example: 36
+                      "SPO2":
+                        type: number
+                        example: 97
+                      "Muscle Mass":
+                        type: number
+                        example: 75
+                      "Body Water":
+                        type: number
+                        example: 50
+                      "Body Fat":
+                        type: number
+                        example: null
+                      "Visceral Fat":
+                        type: number
+                        example: 10
+                  2084-01-02:
+                    type: object
+                    properties:
+                      "Heart Rate":
+                        type: number
+                        example: 70
+                      "Blood Pressure":
+                        type: number
+                        example: 97
+                      "Temperature":
+                        type: number
+                        example: 36.5
+                      "SPO2":
+                        type: number
+                        example: 96.7
+                      "Muscle Mass":
+                        type: number
+                        example: 75.2
+                      "Body Water":
+                        type: number
+                        example: 52.5
+                      "Body Fat":
+                        type: number
+                        example: 12
+                      "Visceral Fat":
+                        type: number
+                        example: null
+  /api/aidoctor:
+    post:
+      description: gives an AI diagnose when you post (mockdata in POC), the numbers in the response are the certainty level in percent
+      operationId: createAiDiagnosis
+      tags:
+        - AI diagnosis
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                symptoms:
+                  type: array
+                  items:
+                    type: string
+                    example: cough
+      responses:
+        '200':
+          description: Successfull
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  diagnose:
+                    type: object
+                    properties:
+                      diseaseName:
+                        type: number
+              example:
+                diagnose:
+                  flue: 50
+                  covid: 10
+  /api/symptoms:
+    get:
+      description: get all existing symptoms
+      operationId: getSymptoms
+      tags:
+        - Info endpoints
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  symptoms:
+                    type: array
+                    items:
+                      type: string
+                required:
+                  - symptoms
+              example:
+                symptoms:
+                  - cough
+                  - fever
+                  - sweat
+components:
+  schemas:
+    baseUser:
+      type: object
+      properties:
+        adriaId:
+          type: integer
+          example: 1
+        firstname:
+          type: string
+          example: "Alice"
+        lastname:
+          type: string
+          example: "Alison"
+        birthdate:
+          type: string
+          example: "2064-07-18"
+        bloodType:
+          type: string
+          enum: ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"]
+          example: "A+"
+        gender:
+          type: string
+          example: "F"
+      required:
+        - adriaId
+        - firstname
+        - lastname
+        - birthdate
+        - bloodType
+        - gender
+      example:
+        adriaId: 1
+        firstname: "Alice"
+        lastname: "Alison"
+        birthdate: "2064-07-18"
+        bloodType: "A+"
+        gender: "F"
+    postUser:
+      allOf:
+        - $ref: '#/components/schemas/baseUser'
+        - type: object
+          properties:
+            colonyId: 
+              type: integer
+              example: 1
+            subscriptionType:
+              type: integer
+              example: 1
+          required:
+           - colonyId
+           - subscriptionType
+          example:
+            adriaId: 1
+            subscriptionType: 1
+            firstname: "Alice"
+            lastname: "Alison"
+            birthdate: "2064-07-18"
+            bloodType: "A+"
+            gender: "F"
+            colonyId: 1
+    getUser:
+      allOf:
+        - $ref: '#/components/schemas/baseUser'
+        - type: object
+          properties:
+            colony: 
+              type: string
+              example: "Adria"
+            subscription:
+              type: string
+              example: "ResQ"
+          required:
+           - colony
+           - subscription
+          example:
+            adriaId: 1
+            subscription: "ResQ"
+            firstname: "Alice"
+            lastname: "Alison"
+            birthdate: "2064-07-18"
+            bloodType: "A+"
+            gender: "F"
+            colony: "Adria"
+    userWithMedicalInfo:
+      allOf:
+        - $ref: '#/components/schemas/getUser'
+        - type: object
+          properties:
+            medicalHistory:
+              type: array
+              items:
+                allOf:
+                  - $ref: '#/components/schemas/getDiagnosis'
+                  - type: object
+                    properties:
+                      entryId:
+                        type: integer
+                        example: 1
+                      date:
+                        type: string
+                        example: "2084-07-15"
+                      time:
+                        type: string
+                        example: "15:37:45"
+                    required:
+                      - entryId
+                      - date
+                      - time
+          required:
+            - medicalHistory
+          example:
+            adriaId: 1
+            subscription: "ResQ"
+            firstname: "Alice"
+            lastname: "Alison"
+            birthdate: "2064-07-18"
+            colony: "Adria"
+            bloodType: "A+"
+            gender: "F"
+            diagnosis:
+              symptoms: ["cough", "stuffy nose", "running nose", "headache"]
+              condition: "flue"
+              diagnosedBy: ["Natalie (0)", "Emilia (1)", "Robert (2)"]
+    baseDiagnosis:
+      type: object
+      properties:
+        date:
+          type: string
+          example: "2084-07-15"
+        time:
+          type: string
+          example: "15:37:45"
+      required:
+        - date
+        - time
+    postDiagnosis:
+      allOf:
+         - $ref: '#/components/schemas/baseDiagnosis'
+         - type: object
+           properties:
+            location:
+              type: object
+              properties:
+                colonyId:
+                  type: integer
+                  example: 1
+                location:
+                  type: object
+                  properties:
+                    lon:
+                      type: number
+                      example: 50.151562
+                    lat:
+                      type: number
+                      example: 5.320008
+                  required:
+                    - lon
+                    - lat
+            diagnosedBy:
+               type: array
+               items:
+                 type: integer
+               example: [-1]
+            diagnosis:
+              type: object
+              properties:
+                symptoms:
+                  type: array
+                  items:
+                    type: string
+                  example: ["cough", "stuffy nose", "running nose", "headache"]
+                condition:
+                  type: string
+                  example: "flue"
+              required:
+                - symptoms
+                - condition
+           required:
+           - diagnosedBy
+           - diagnosis
+    getDiagnosis:
+      allOf:
+         - $ref: '#/components/schemas/baseDiagnosis'
+         - type: object
+           properties:
+            location:
+              type: object
+              properties:
+                colony:
+                  type: string
+                  example: "Adria"
+                location:
+                  type: object
+                  properties:
+                    lon:
+                      type: number
+                      example: 50.151562
+                    lat:
+                      type: number
+                      example: 5.320008
+                  required:
+                    - lon
+                    - lat
+            diagnosedBy:
+               type: array
+               items:
+                 type: string
+               example: ["Natalie (0)", "Emilia (1)", "Robert (2)"]
+            diagnosis:
+              type: object
+              properties:
+                symptoms:
+                  type: array
+                  items:
+                    type: string
+                  example: ["cough", "stuffy nose", "running nose", "headache"]
+                condition:
+                  type: string
+                  example: "flue"
+              required:
+                - symptoms
+                - condition
+           required:
+           - diagnosedBy
+           - diagnosis

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Diagnosis</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <script src="assets/js/borderButtons.js" defer></script>
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="assets/css/diagnose-page/diagnose.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <script src="assets/js/helpers/storage-abstractor.js"></script>
+    <script src="assets/js/Diagnoses/diagnose.js" defer></script>
+    <script src="assets/js/helpers/helpers.js"></script>
+
+
+</head>
+<body>
+<header>
+    <img id="logo" src="./images/logo.png" alt="logo" draggable="false">
+    <button id="settings">Settings</button>
+</header>
+<main>
+    <section id="analyzing" class="loading">
+        <h2>Please wait while we scan and analyze your vitals.</h2>
+        <img src="assets/media/Magnify-1.4s-200px.gif" alt="loading" title="loading">
+    </section>
+    <section id="diagnosis">
+        <h1>Diagnosis:</h1>
+        <p class="diagnosis">illness not found</p>
+        <nav>
+            <button id="back">&lt; back</button>
+            <button id="history">Personal History</button>
+        </nav>
+    </section>
+
+
+</main>
+<footer>
+    <button id="guidance">Emergency Guidance</button>
+    <label for="emergencySlider" class="emergencyText" id="emergencyLabel">! ALERT EMERGENCIES !</label>
+    <input type="range" min="0" max="10000000000000" value="0" class="slider" id="emergencySlider">
+</footer>
+</body>
+</html>

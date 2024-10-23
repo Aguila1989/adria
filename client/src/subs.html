@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subscriptions</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/register-page/register-page.css">
+    <script src="assets/js/register-page/register-page.js" defer></script>
+    <script src="assets/js/plans.js"></script>
+    <script src="assets/js/helpers/storage-abstractor.js"></script>
+    <script src="assets/js/helpers/helpers.js"></script>
+</head>
+<body>
+    <header>
+        <img src="images/logo.png" alt="logo" draggable="false" id="logo">
+        <h1>Choose your plan</h1>
+    </header>
+    <main>
+        <h2>AdraMed offers various plans that will satisfy all your needs</h2>
+        <div class="flex-container">
+            <div class="plans">
+                <div class="chosen-plan hidden"></div>
+            </div>
+        </div>
+    </main>
+    <template id="plan">
+        <article id="">
+            <h3></h3>
+            <ul>
+            </ul>
+            <p></p>
+            <button class="choose"></button>
+        </article>
+    </template>
+
+    <template id="plan-detail">
+        <article id="*">
+            <div class="interval-buttons">
+                <button class="monthly selectedInterval">monthly</button>
+                <button class="yearly unselectedInterval">yearly</button>
+            </div>
+            <dl>
+                <dd>Pay Intervals</dd>
+                <dt class="intervals"></dt>
+                <dd>Payment Amount / Interval</dd>
+                <dt class="pay-amount"></dt>
+                <dd>Due now</dd>
+                <dt class="due"></dt>
+                <button class="confirm">Confirm</button>
+            </dl>
+        </article>
+    </template>
+</body>
+</html>

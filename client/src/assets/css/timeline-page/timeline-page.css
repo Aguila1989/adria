@@ -1,0 +1,65 @@
+header {
+  background-color: #7fffd4;
+  height: 15vh;
+  display: flex;
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+header img {
+  max-height: 100%;
+}
+header h1 {
+  font-size: 3rem;
+  margin: 0 auto;
+  position: absolute;
+  transform: translatex(-50%);
+  left: 50%;
+  text-align: center;
+  align-self: center;
+}
+header img {
+  display: inline-block;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-bottom: 10rem;
+}
+main .container {
+  position: relative;
+  width: 45vw;
+  margin-bottom: 5rem;
+}
+main .container canvas {
+  width: 100%;
+}
+
+footer {
+  height: 1vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+footer nav {
+  display: flex;
+  justify-content: center;
+}
+footer nav button {
+  display: block;
+  border-radius: 2rem;
+  font-size: 2rem;
+  border: none;
+  color: #0A3200;
+  box-shadow: 0.1rem 0.1rem 0.3rem #0A3200;
+  position: fixed;
+  bottom: 5rem;
+  width: 15rem;
+  height: 5rem;
+}
+footer nav button:hover {
+  box-shadow: inset 0.1rem 0.1rem 0.3rem #0A3200;
+}
+
+/*# sourceMappingURL=timeline-page.css.map */

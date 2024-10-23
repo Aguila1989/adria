@@ -1,0 +1,93 @@
+header {
+  background-color: #7fffd4;
+  height: 15vh;
+  display: flex;
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+header img {
+  max-height: 100%;
+}
+header h1 {
+  font-size: 3rem;
+  margin: 0 auto;
+  position: absolute;
+  transform: translatex(-50%);
+  left: 50%;
+  text-align: center;
+  align-self: center;
+}
+header img {
+  display: inline-block;
+}
+
+main {
+  height: 70vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-auto-flow: column;
+}
+main .data-set {
+  height: 22%;
+  margin: 0.75rem;
+  display: flex;
+  justify-content: center;
+}
+main .data-set div {
+  width: 50%;
+}
+main .data-set .percentage {
+  display: flex;
+  width: 35%;
+}
+main .data-set .percentage p {
+  display: inline-block;
+  font-size: 4vw;
+}
+main .data-set .percentage figure {
+  margin-right: 1rem;
+  display: inline-block;
+  width: 20%;
+}
+main .data-set .percentage figure img {
+  border: solid 0.2rem #242424;
+  border-radius: 0.75rem;
+  padding: 0.25rem;
+  width: 90%;
+}
+main .data-set .percentage figure figcaption {
+  text-align: center;
+}
+
+footer {
+  height: 1vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+footer nav {
+  display: flex;
+  justify-content: center;
+}
+footer nav button {
+  display: block;
+  border-radius: 2rem;
+  font-size: 2rem;
+  border: none;
+  color: #0A3200;
+  box-shadow: 0.1rem 0.1rem 0.3rem #0A3200;
+  position: fixed;
+  bottom: 5rem;
+  width: 15rem;
+  height: 5rem;
+}
+footer nav button:hover {
+  box-shadow: inset 0.1rem 0.1rem 0.3rem #0A3200;
+}
+
+main .data-set.notInResQ {
+  display: none;
+}
+
+/*# sourceMappingURL=data-page.css.map */

@@ -1,0 +1,158 @@
+body {
+  background-color: #ffffff;
+  color: #363636;
+  font-size: 1rem;
+  font-family: "new times romans", Helvetica, serif;
+  height: 100vh;
+}
+body header {
+  background-color: #7fffd4;
+  height: 15vh;
+  display: flex;
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+body header img {
+  max-height: 100%;
+}
+body header h1 {
+  font-size: 3rem;
+  margin: 0 auto;
+  position: absolute;
+  transform: translatex(-50%);
+  left: 50%;
+  text-align: center;
+  align-self: center;
+}
+body header img {
+  display: inline-block;
+}
+body main {
+  height: 80vh;
+}
+body main .flex-container .hidden {
+  display: none;
+}
+body main article {
+  width: 25vw;
+  overflow: hidden;
+  padding: 0 0 4rem 0;
+  font-size: 1.5rem;
+}
+body main article #yearly {
+  background-color: grey;
+}
+body h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+body .flex-container {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+body .flex-container .chosen-plan {
+  height: 100%;
+  width: 100%;
+}
+body .flex-container .chosen-plan article {
+  padding: 0 2rem 4rem 2rem;
+}
+body .flex-container .move {
+  animation: toPosition 0.5s ease-in-out forwards;
+  transform: translateX(0%);
+}
+@keyframes toPosition {
+  to {
+    left: 20%;
+    transform: translateX(0%);
+  }
+}
+body .flex-container article {
+  position: absolute;
+  top: 0;
+  box-shadow: 0.1rem 0.1rem 0.3rem #0A3200;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 4rem;
+  width: 20%;
+  height: 35rem;
+  background-color: #7fffd4;
+}
+body .flex-container article dd {
+  font-weight: bold;
+}
+body .flex-container article dt {
+  display: block;
+  margin-bottom: 1rem;
+}
+body .flex-container article:nth-child(2) {
+  left: 5%;
+}
+body .flex-container article:nth-child(3) {
+  left: 50%;
+  transform: translateX(-50%);
+}
+body .flex-container article:last-child {
+  left: 70%;
+}
+body .flex-container article button {
+  margin: 2rem;
+  width: 15rem;
+  height: 6rem;
+  display: block;
+  border-radius: 2rem;
+  font-size: 2rem;
+  border: none;
+  color: #0A3200;
+  box-shadow: 0.1rem 0.1rem 0.3rem #0A3200;
+  background-color: #ffffff;
+}
+body .flex-container article button:hover {
+  box-shadow: inset 0.1rem 0.1rem 0.3rem #0A3200;
+}
+body .flex-container article .interval-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+body .flex-container article .interval-buttons button {
+  border-radius: 0;
+  width: 12.5vw;
+  margin: unset;
+}
+body .flex-container article .interval-buttons .selectedInterval {
+  background-color: #7fffd4;
+  color: #484848;
+  box-shadow: none;
+}
+body .flex-container article .interval-buttons .unselectedInterval {
+  background-color: #484848;
+  color: #ffffff;
+}
+body .flex-container article h3 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+body .flex-container article ul {
+  margin-bottom: 2rem;
+  height: 75%;
+}
+body .flex-container article ul li {
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+}
+body .flex-container article p {
+  font-size: 2.5rem;
+}
+body .flex-container .chosen-plan article {
+  left: 55%;
+}
+
+/*# sourceMappingURL=screen.css.map */
